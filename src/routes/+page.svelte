@@ -2,6 +2,7 @@
   import icebreakerFile from "$lib/icebreakers.txt?raw";
   import { onMount } from "svelte";
   import Header from "./header.svelte";
+  import Pwa from "./pwa.svelte";
 
   const icebreakers = icebreakerFile.split("\n").filter(Boolean);
   const warnings: string[] = [];
@@ -11,7 +12,7 @@
     icebreaker = icebreakers[Math.floor(Math.random() * icebreakers.length)];
   }
 
-  function shareJoke() {
+  function shareIcebreaker() {
     if (navigator.share) {
       navigator
         .share({
@@ -29,10 +30,11 @@
   onMount(randomIcebreaker);
 </script>
 
+<Pwa />
 <Header />
 <h1>{icebreaker}</h1>
 <button on:click={randomIcebreaker}>Get Question</button>
-<button on:click={shareJoke}>Share</button>
+<button on:click={shareIcebreaker}>Share</button>
 
 <p class="footer">-- pool has {icebreakers.length} ice breakers --</p>
 
